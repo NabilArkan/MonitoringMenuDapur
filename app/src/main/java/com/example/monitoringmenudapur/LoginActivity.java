@@ -58,10 +58,14 @@ public class LoginActivity extends AppCompatActivity {
 
         if (!validate()){
             onLoginFailed();
-            return;;
+            return;
         }
     }
 
+    private void onLoginFailed() {
+    }
+
     private boolean validate() {
+        return false;
     }
 }
