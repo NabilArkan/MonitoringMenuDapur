@@ -7,11 +7,13 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:id="@+id/txt_home"
+        android:id="@+id/txt_menu_pekanan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Home"
-        android:layout_centerInParent="true"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
-
+        android:text="Menu Pekanan"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        android:textColor="@color/primary_color_text"/>
 </RelativeLayout>

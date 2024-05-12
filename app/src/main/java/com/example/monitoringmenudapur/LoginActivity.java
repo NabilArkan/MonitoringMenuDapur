@@ -60,12 +60,64 @@ public class LoginActivity extends AppCompatActivity {
             onLoginFailed();
             return;
         }
+
+        btnLogin.setEnabled(false);
+
+        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Authenticating...");
+        progressDialog.show();
+
+        String isiUser = Username.getText().toString();
+        String isiPass = Password.getText().toString();
+
+        InputMethodManager imm =
+                (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(Username.getWindowToken(), 0);
+
+        sharedPreference.save(this, isiUser);
+        Toast.makeText(context, "Berhasil login", Toast.LENGTH_SHORT).show();
+
+        new android.os.Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                onLoginSucces();
+                progressDialog.dismiss();
+            }
+        },3000);
+    }
+
+    private void onLoginSucces() {
+        Intent intent = new Intent(context, MainActivity.class);
+        startActivity(intent);
+        btnLogin.setEnabled(true);
+        finish();
     }
 
     private void onLoginFailed() {
+        Toast.makeText(this, "Login gagal", Toast.LENGTH_SHORT).show();
+        btnLogin.setEnabled(true);
     }
 
     private boolean validate() {
-        return false;
+        boolean valid = true;
+
+        String user = Username.getText().toString();
+        String pass = Password.getText().toString();
+
+        if (user.isEmpty()){
+            Username.setError("Username tidak boleh kosong");
+            valid = false;
+        }else{
+            Username.setError(null);
+        }
+
+        if (pass.isEmpty()){
+            Password.setError("Password tidak boleh kosong");
+            valid = false;
+        }else{
+            Password.setError(null);
+        }
+        return valid;
     }
 }
